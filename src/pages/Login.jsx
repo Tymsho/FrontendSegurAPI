@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { AuthContext } from '../context/AuthContext';
 import logo from '../assets/logo.jpg';
@@ -100,12 +100,9 @@ const Login = () => {
           </form>
         </CardContent>
         
-        <CardFooter className="flex justify-center border-t border-border pt-4">
-          <p className="text-sm text-muted-foreground">
-            ¿No tienes una cuenta?{' '}
-            <Link to="/registro" className="text-primary font-medium hover:underline">
-              Regístrate aquí
-            </Link>
+        <CardFooter className="flex justify-center border-t border-border pt-4 text-center">
+          <p className="text-xs text-muted-foreground">
+            Acceso exclusivo para productores registrados. Solicite su alta al administrador.
           </p>
         </CardFooter>
       </Card>

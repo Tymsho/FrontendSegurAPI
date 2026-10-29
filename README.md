@@ -1,48 +1,122 @@
-# Frontend SegurAPI
+# 🛡️ SegurAPI — Frontend Web Client
 
-Este proyecto es el cliente web para la gestión de pólizas y clientes de SegurAPI, construido con **React**, **Vite** y con soporte para notificaciones en tiempo real vía **WebSockets (STOMP)**.
+> 🌐 **Language / Idioma:** **English** | [Español](./README-Es.md)
 
-## 🛠️ Requisitos Previos
-
-Asegúrate de tener instalado:
-* [Node.js](https://nodejs.org/) (versión 18 o superior recomendada)
-* Un gestor de paquetes como `npm` (incluido con Node)
+Modern web client for insurance policy, client, and portfolio management built for **SegurAPI**. Developed with **React 19**, **Vite 8**, **Tailwind CSS v4**, **TanStack Query v5**, and real-time notifications powered by **WebSockets (STOMP)**.
 
 ---
 
-## 🚀 Guía de Inicio Rápido
+## ✨ Key Features
 
-Sigue estos pasos para levantar el proyecto localmente:
+- **📊 Interactive Analytics Dashboard:** Real-time KPIs, historical billing evolution, insurance company/branch distribution, and customizable widgets using **Recharts**.
+- **👥 Client Management:** Full CRUD operations with pagination, search, Argentine tax/DNI normalization, and geographic integration (provinces and localities).
+- **📄 Policy Management & PDF Storage:** Create, edit, filter, sort, and cancel insurance policies with direct PDF attachment upload and preview.
+- **🤖 Smart Portfolio Import (Excel / CSV):** Bulk import insurance portfolios from `.xlsx`, `.xls`, or `.csv` files with automatic AI-assisted column mapping (Google Gemini Flash / local heuristics) and dynamic template caching.
+- **🔔 Real-Time Notifications:** Instant alerts for policy expirations and system events via **STOMP over WebSockets (`@stomp/stompjs` & `sockjs-client`)**.
+- **🔐 Role-Based Access & Security:** JWT authentication, route protection (`ADMIN` and `PRODUCTOR` roles), user administration panel, and subscription plan management (**MercadoPago** integration).
+- **🌓 Modern UI & Dark Mode:** Responsive interface built with **Radix UI**, **Tailwind CSS v4**, **Lucide Icons**, and theme switching (`light` / `dark`).
 
-### 1. Clonar el repositorio e instalar dependencias
-Entra al directorio del proyecto y ejecuta:
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technologies |
+| :--- | :--- |
+| **Core** | React 19, Vite 8, React Router v7 |
+| **State & Data Fetching** | TanStack React Query v5, Axios |
+| **Styling & UI Components** | Tailwind CSS v4, Radix UI Primitives, Lucide React, Sonner (Toasts) |
+| **Charts & Visualization** | Recharts v3 |
+| **Real-Time Communication** | `@stomp/stompjs`, `sockjs-client` |
+| **Testing** | Vitest, React Testing Library, JSDOM |
+
+---
+
+## 📋 Prerequisites
+
+Make sure you have installed:
+- [Node.js](https://nodejs.org/) (v18+ or v20+ recommended)
+- `npm` (included with Node.js)
+- A running instance of the **SegurAPI Backend** (`SegurAPI-Spring`)
+
+---
+
+## 🚀 Quick Start Guide
+
+Follow these steps to run the project locally:
+
+### 1. Clone the repository & install dependencies
+Navigate to the `FrontendSegurAPI` directory and install the packages:
 ```bash
+cd FrontendSegurAPI
 npm install
 ```
 
-### 2. Configurar variables de entorno
-1. Copia el archivo de ejemplo para crear tu archivo `.env` local:
+### 2. Configure environment variables
+1. Copy the example environment file to create your local `.env`:
    ```bash
    cp .env.example .env
    ```
-2. Abre el archivo `.env` y ajusta las URLs si tu backend corre en un puerto o dominio distinto:
-   * `VITE_API_URL`: URL base del API Backend.
-   * `VITE_FILES_URL`: Endpoint para la descarga de archivos.
-   * `VITE_WS_URL`: Endpoint de WebSocket (STOMP) para las notificaciones en tiempo real.
+2. Open `.env` and adjust the URLs if your backend runs on a different port or domain:
+   ```env
+   # Base URL of the Backend REST API
+   VITE_API_URL=http://localhost:8080/api
 
-### 3. Iniciar el servidor de desarrollo
-Para correr la aplicación en modo desarrollo con soporte para recarga rápida (HMR):
+   # Base URL for accessing uploaded files/PDFs
+   VITE_BACKEND_URL=http://localhost:8080
+
+   # WebSocket (STOMP) endpoint for real-time notifications
+   VITE_WS_URL=http://localhost:8080/ws
+   ```
+
+### 3. Start the development server
+Run the application in development mode with Hot Module Replacement (HMR):
 ```bash
 npm run dev
 ```
-Por defecto, la aplicación estará disponible en [http://localhost:5173](http://localhost:5173).
+By default, the app will be available at [http://localhost:5173](http://localhost:5173).
 
 ---
 
-## 📦 Construcción para Producción
+## 🧪 Running Tests & Linting
 
-Si deseas compilar la aplicación para producción:
+Run the unit and component test suite with **Vitest**:
+```bash
+npm test
+```
+
+Run ESLint to verify code quality:
+```bash
+npm run lint
+```
+
+---
+
+## 📦 Building for Production
+
+To compile and optimize the application for production deployment:
 ```bash
 npm run build
 ```
-Esto generará los archivos optimizados dentro de la carpeta `dist`.
+This generates the production-ready static assets inside the `dist/` directory. You can preview the production build locally with:
+```bash
+npm run preview
+```
+
+---
+
+## 📁 Project Structure
+
+```text
+FrontendSegurAPI/
+├── public/                 # Static assets
+├── src/
+│   ├── components/         # Reusable modals, layout, and Radix/Tailwind UI primitives
+│   ├── context/            # AuthContext, NotificationContext (STOMP), and ThemeContext
+│   ├── pages/              # Application views (Dashboard, Clientes, Polizas, Reportes, UsuariosAdmin, Perfil, Login)
+│   ├── services/           # Axios API client and domain service modules
+│   ├── App.jsx             # Router configuration and context providers
+│   └── main.jsx            # Application entry point
+├── .env.example            # Environment variables template
+├── package.json            # Dependencies and scripts
+└── vite.config.js          # Vite bundler configuration
+```

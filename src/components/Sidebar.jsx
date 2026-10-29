@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, Shield, LineChart, UserCircle, X, Bell, Sun, Moon, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users, Shield, LineChart, UserCircle, UserCog, X, Bell, Sun, Moon, LogOut } from 'lucide-react';
 import logo from '../assets/logo.jpg';
 import { Button } from './ui/button';
 import { AuthContext } from '../context/AuthContext';
@@ -27,6 +27,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { path: '/clientes', name: 'Clientes', icon: Users },
     { path: '/polizas', name: 'Pólizas', icon: Shield },
     { path: '/reportes', name: 'Reportes', icon: LineChart },
+    ...(user?.rol === 'ADMIN' ? [{ path: '/usuarios', name: 'Usuarios', icon: UserCog }] : []),
     { path: '/perfil', name: 'Perfil', icon: UserCircle }
   ];
 
